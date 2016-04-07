@@ -1,12 +1,9 @@
-using UFind;
-using UnityEngine;
-using NUnit.Framework;
-using System.Collections.Generic;
-using System.Collections;
-
-public interface IGenerateResultCollection
+namespace UFind
 {
-	IResultCollection Results { get; }
+	public interface IGenerateResultCollection
+	{
+		IResultCollection Results { get; }
 
-	void GenerateResults(IFinderContext context);
+		void GenerateResults(IFinderContext context);
+	}
 }
