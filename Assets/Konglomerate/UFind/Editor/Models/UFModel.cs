@@ -113,6 +113,9 @@ namespace UFind
 				ResultCount += plugin.Results.Count;
 			}
 
+			var sortedPlugins = Plugins.OrderByDescending(p => p.Score);
+			Plugins = new LinkedList<UFPlugin>(sortedPlugins);
+
 			var selectedPlugin = Plugins.FirstOrDefault(p => p.Results.Count > 0);
 			Context.CurrentResult = selectedPlugin != null 
 				? selectedPlugin.Results.FirstOrDefault()
