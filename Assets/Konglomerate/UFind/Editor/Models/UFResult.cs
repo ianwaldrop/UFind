@@ -13,6 +13,11 @@ namespace UFind
 
 		public abstract string Title { get; }
 
+		public int Score
+		{
+			get { return UFModel.Context.GetMatchScoreForResult(this); }
+		}
+
 		public virtual GUIContent Content
 		{
 			get

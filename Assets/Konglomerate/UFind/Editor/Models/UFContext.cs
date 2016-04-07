@@ -44,6 +44,11 @@ namespace UFind
 			return GetMatchScoreForTerm(term) > 0;
 		}
 
+		public int GetMatchScoreForResult(IFinderResult result)
+		{
+			return GetMatchScoreForTerm(result.Title);
+		}
+
 		public int GetMatchScoreForTerm(string term)
 		{
 			var currentScores = cachedScores[currentQueryValue];
