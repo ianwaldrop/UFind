@@ -24,7 +24,7 @@ namespace UFind
 
 		public string Lower { get { return Value.ToLower(); } }
 
-		public UFQuery(string query)
+		internal UFQuery(string query)
 		{
 			EditorPrefs.SetString(EPKEY_UFIND_QUERY, query);
 		}
@@ -33,6 +33,5 @@ namespace UFind
 		{
 			return new UFQuery(query);
 		}
-
 	}
 }

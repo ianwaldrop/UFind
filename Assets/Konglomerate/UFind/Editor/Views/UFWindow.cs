@@ -5,7 +5,7 @@ using UnityEditor;
 
 namespace UFind
 {
-	public class UFWindow : EditorWindow
+	class UFWindow : EditorWindow
 	{
 		const float SEARCH_BAR_HEIGHT = 46;
 		const float MAX_WINDOW_HEIGHT = 512;

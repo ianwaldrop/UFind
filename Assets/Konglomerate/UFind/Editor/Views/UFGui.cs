@@ -3,9 +3,9 @@ using UnityEditor;
 
 namespace UFind
 {
-	public static class UFGui
+	static class UFGui
 	{
-		public static void SearchBar()
+		internal static void SearchBar()
 		{
 			const string QUERY_FIELD_NAME = "query";
 
@@ -26,15 +26,14 @@ namespace UFind
 					UFController.UpdateQuery(query);
 				}
 
-				if (UFModel.Context.CurrentResult != null)
+				if (UFModel.Context.SelectedResult != null)
 				{
-					GUILayout.Box(UFModel.Context.CurrentResult.Content.image, UFStyles.Icons);
+					GUILayout.Box(UFModel.Context.SelectedResult.Content.image, UFStyles.Icons);
 				}
 			}
-
 		}
 
-		public static void ResultList(float width)
+		internal static void ResultList(float width)
 		{
 			using (var scope = new GUILayout.ScrollViewScope(UFModel.ResultListViewScrollPosition, GUILayout.Width(width)))
 			{
@@ -53,11 +52,11 @@ namespace UFind
 			}
 		}
 
-		public static void ResultItem(IFinderResult result)
+		internal static void ResultItem(IFinderResult result)
 		{
 			using (new GUILayout.HorizontalScope())
 			{
-				if (UFModel.Context.CurrentResult == result)
+				if (UFModel.Context.SelectedResult == result)
 				{
 					GUI.SetNextControlName("focused");
 					GUI.FocusControl("focused");
@@ -97,7 +96,7 @@ namespace UFind
 			}
 		}
 
-//		public static void DetailView(IFinderResult result, float width)
+//		internal static void DetailView(IFinderResult result, float width)
 //		{
 //			if (result.DetailView != null)
 //			{

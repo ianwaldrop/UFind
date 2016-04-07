@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace UFind
 {
-	static class UFModel
+	internal static class UFModel
 	{
 		#region Constructors
 		static UFModel()
@@ -31,12 +31,12 @@ namespace UFind
 		#region Actions
 		internal static void SelectResult(IFinderResult result)
 		{
-			Context.CurrentResult = result;
+			Context.SelectedResult = result;
 		}
 
 		internal static void SelectPreviousResult()
 		{
-			var result = Context.CurrentResult;
+			var result = Context.SelectedResult;
 			if (result != null)
 			{
 				var plugin = GetPluginForResult(result);
@@ -58,7 +58,7 @@ namespace UFind
 
 		internal static void SelectNextResult()
 		{
-			var result = Context.CurrentResult;
+			var result = Context.SelectedResult;
 			if (result != null)
 			{
 				var plugin = GetPluginForResult(result);
@@ -117,7 +117,7 @@ namespace UFind
 			Plugins = new LinkedList<UFPlugin>(sortedPlugins);
 
 			var selectedPlugin = Plugins.FirstOrDefault(p => p.Results.Count > 0);
-			Context.CurrentResult = selectedPlugin != null 
+			Context.SelectedResult = selectedPlugin != null 
 				? selectedPlugin.Results.FirstOrDefault()
 				: null;
 		}

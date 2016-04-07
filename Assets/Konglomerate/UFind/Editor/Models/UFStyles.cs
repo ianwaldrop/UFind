@@ -1,16 +1,10 @@
-﻿/*
- * Copyright © 2014 Krakhaus
- *
- * Styles
- */
-
-using System.Linq;
+﻿using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
 namespace UFind
 {
-	public static class UFStyles
+	static class UFStyles
 	{
 		#region Constructors
 		static UFStyles()
@@ -28,51 +22,51 @@ namespace UFind
 		#endregion
 
 		#region Properties
-		public static GUISkin Skin { get; private set; }
+		internal static GUISkin Skin { get; private set; }
 
-		public static GUIStyle SearchField
+		internal static GUIStyle SearchField
 		{
 			get { return Skin.GetStyle("search-field"); }
 		}
 
-		public static GUIStyle Header
+		internal static GUIStyle Header
 		{
 			get { return Skin.GetStyle("header"); }
 		}
 
-		public static GUIStyle Title
+		internal static GUIStyle Title
 		{
 			get { return Skin.GetStyle("result-title"); }
 		}
 
-		public static GUIStyle Description
+		internal static GUIStyle Description
 		{
 			get { return Skin.GetStyle("result-description"); }
 		}
 
-		public static GUIStyle SearchIcon
+		internal static GUIStyle SearchIcon
 		{
 			get { return Skin.GetStyle("search-icon"); }
 		}
 
-		public static GUIStyle Icons
+		internal static GUIStyle Icons
 		{
 			get { return Skin.GetStyle("icons"); }
 		}
 
-		public static GUIStyle Result
+		internal static GUIStyle Result
 		{
 			get { return Skin.GetStyle("result"); }
 		}
 
-		public static GUIStyle Help
+		internal static GUIStyle Help
 		{
 			get { return Skin.GetStyle("help-text"); }
 		}
 
 		// due to some issue with unity we have to load _ALL_ of the textures first and query for them by name...
-		// so globally accessable helper because helpful
-		public static Texture2D BuiltInTexture(string name)
+		// so globally accessable helper because helpful - Ian
+		internal static Texture2D BuiltInTexture(string name)
 		{
 			return textures.FirstOrDefault(t => t.name.Equals(name));
 		}

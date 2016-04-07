@@ -7,11 +7,13 @@ namespace UFind
 	public abstract class UFResult : IFinderResult
 	{
 		#region IFinderResult implementation
+		public abstract void Execute(IFinderContext context);
+
 //		public virtual IDetailView DetailView { get { return null; } }
 
-		public abstract GUIContent Description { get; }
-
 		public abstract string Title { get; }
+
+		public abstract GUIContent Description { get; }
 
 		public int Score
 		{
@@ -27,10 +29,6 @@ namespace UFind
 				return content;
 			}
 		}
-		#endregion
-
-		#region Actions
-		public abstract void Execute(IFinderContext context);
 		#endregion
 
 		#region Protected

@@ -7,13 +7,14 @@ namespace UFind
 {
 	public abstract class UFPlugin : IFinderPlugin
 	{
+
+		#region IFinderPlugin implementation
+		public abstract string Name { get; }
+
 		public int Score
 		{
 			get { return results.Sum(r => r.Score); }
 		}
-
-		#region IFinderPlugin implementation
-		public abstract string Name { get; }
 		#endregion
 
 		#region IGenerateResultCollection implementation
