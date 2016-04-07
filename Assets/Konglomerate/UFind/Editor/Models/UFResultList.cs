@@ -4,5 +4,6 @@ namespace UFind
 {
 	public class UFResultCollection : List<IFinderResult>, IResultCollection
 	{
+		
 	}
 }

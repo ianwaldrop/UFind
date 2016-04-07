@@ -5,6 +5,11 @@ namespace UFind
 {
 	public abstract class UFPlugin : IGenerateResultCollection, IFinderPlugin
 	{
+		public int Score
+		{
+			get { return results.Sum(r => r.Score); }
+		}
+
 		#region IFinderPlugin implementation
 		public abstract string Name { get; }
 		#endregion

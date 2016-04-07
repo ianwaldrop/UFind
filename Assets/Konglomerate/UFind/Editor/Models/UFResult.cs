@@ -1,18 +1,22 @@
 ﻿using UnityEngine;
 using UnityEditor;
 using UnityEditorInternal;
-using System.Xml.Schema;
 
 namespace UFind
 {
 	public abstract class UFResult : IFinderResult
 	{
 		#region IFinderResult implementation
-		//		public virtual IDetailView DetailView { get { return null; } }
+//		public virtual IDetailView DetailView { get { return null; } }
 
 		public abstract GUIContent Description { get; }
 
 		public abstract string Title { get; }
+
+		public int Score
+		{
+			get { return UFModel.Context.GetMatchScoreForResult(this); }
+		}
 
 		public virtual GUIContent Content
 		{

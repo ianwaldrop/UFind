@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace UFind
 {
-	public interface IFinderResult
+	public interface IFinderResult : IRanked
 	{
 //		IDetailView DetailView { get; }
 		GUIContent Description { get; }
