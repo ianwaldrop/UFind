@@ -1,9 +1,11 @@
 ﻿using UFind;
+using System.Linq;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace UFind
 {
-	public abstract class UFPlugin : IGenerateResultCollection, IFinderPlugin
+	public abstract class UFPlugin : IFinderPlugin
 	{
 		public int Score
 		{
@@ -15,7 +17,7 @@ namespace UFind
 		#endregion
 
 		#region IGenerateResultCollection implementation
-		public IResultCollection Results { get { return results; } }
+		public ReadOnlyCollection<IFinderResult> Results { get { return results.AsReadOnly(); } }
 
 		public void GenerateResults(IFinderContext context)
 		{
@@ -47,7 +49,7 @@ namespace UFind
 		#endregion
 
 		#region Private
-		readonly IResultCollection results = new UFResultCollection();
+		List<IFinderResult> results = new List<IFinderResult>();
 		#endregion
 	}
 }
