@@ -1,0 +1,13 @@
+{
+  "name": "finder",
+  "version": "0.2.0",
+  "description": "An extensible tool for finding things in Unity3D.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ianwaldrop/unity-finder.git"
+  },
+  "dependencies": { },
+  "scripts": { },
+  "author": "Ian Waldrop <waldropij@gmail.com>",
+  "license": "ISC"
+}
