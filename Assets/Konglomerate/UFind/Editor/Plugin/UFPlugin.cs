@@ -30,9 +30,11 @@ namespace UFind
 
 				if (generatedResults != null)
 				{
-					Results.AddRange(generatedResults);
+					results.AddRange(generatedResults);
 				}
 			}
+
+			results = results.OrderByDescending(r => r.Score).ToList();
 		}
 		#endregion
 
