@@ -15,7 +15,6 @@ namespace UFind
 			return Object.FindObjectsOfType<Component>()
 				.Where(c => !ignoredTypes.Contains(c.GetType())
 				       && context.GetIsMatchForTerm(ObjectNames.GetInspectorTitle(c)))
-				.OrderBy(c => c.transform.GetSiblingIndex())
 				.Select<Component, IFinderResult>(c => new ComponentResult(c));
 		}
 
