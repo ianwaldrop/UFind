@@ -1,7 +1,13 @@
-﻿namespace UFind
+﻿using System.Collections.ObjectModel;
+
+namespace UFind
 {
-	public interface IFinderPlugin : IGenerateResultCollection
+	interface IFinderPlugin : IRanked
 	{
+		void GenerateResults(IFinderContext context);
+
+		ReadOnlyCollection<IFinderResult> Results { get; }
+
 		string Name { get; }
 	}
 }

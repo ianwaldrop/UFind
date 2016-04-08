@@ -5,37 +5,25 @@ using System.Collections.Generic;
 
 namespace UFind
 {
-	public class UFContext : IFinderContext
+	class UFContext : IFinderContext
 	{
-		public UFContext()
+		internal UFContext()
 		{
 			CacheQueryData(Query);
 		}
 
 		#region Properties
+		public bool IsSlashCommand { get { return Query.Value.StartsWith("/"); } }
+
+		public Event CurrentEvent { get { return Event.current; } }
+
+		public IFinderResult SelectedResult { get; internal set; }
+
 		public UFQuery Query
 		{
 			get { return query; }
 			set { CacheQueryData(query = value); }
 		}
-
-		void CacheQueryData(UFQuery query)
-		{
-			currentQueryValue = query.Value;
-			currentQueryLowerChars.Clear();
-			currentQueryLowerChars.AddRange(Query.Lower.ToCharArray());
-
-			if (!cachedScores.ContainsKey(currentQueryValue))
-			{
-				cachedScores.Add(currentQueryValue, new Dictionary<string, int>());
-			}
-		}
-
-		public bool IsSlashCommand { get { return Query.Value.StartsWith("/"); } }
-
-		public Event CurrentEvent { get { return Event.current; } }
-
-		public IFinderResult CurrentResult { get; internal set; }
 		#endregion
 
 		#region Actions
@@ -43,8 +31,15 @@ namespace UFind
 		{
 			return GetMatchScoreForTerm(term) > 0;
 		}
+		#endregion
 
-		public int GetMatchScoreForTerm(string term)
+		#region Internal
+		internal int GetMatchScoreForResult(IFinderResult result)
+		{
+			return GetMatchScoreForTerm(result.Title);
+		}
+
+		internal int GetMatchScoreForTerm(string term)
 		{
 			var currentScores = cachedScores[currentQueryValue];
 			if (currentScores.ContainsKey(term))
@@ -77,6 +72,18 @@ namespace UFind
 		readonly List<char> currentQueryLowerChars = new List<char>();
 		string currentQueryValue;
 		UFQuery query;
+
+		void CacheQueryData(UFQuery query)
+		{
+			currentQueryValue = query.Value;
+			currentQueryLowerChars.Clear();
+			currentQueryLowerChars.AddRange(Query.Lower.ToCharArray());
+
+			if (!cachedScores.ContainsKey(currentQueryValue))
+			{
+				cachedScores.Add(currentQueryValue, new Dictionary<string, int>());
+			}
+		}
 		#endregion
 	}
 }

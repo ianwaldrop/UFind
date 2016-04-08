@@ -26,6 +26,11 @@ namespace UFind
 			}
 		}
 
+		public override string Title
+		{
+			get { return ObjectNames.NicifyVariableName(gameObject.name); }
+		}
+
 		public override GUIContent Description
 		{
 			get
@@ -38,11 +43,6 @@ namespace UFind
 					? GetContentForAdditiveSelection(Title)
 					: GetHierarchyPath(gameObject);
 			}
-		}
-
-		public override string Title
-		{
-			get { return ObjectNames.NicifyVariableName(gameObject.name); }
 		}
 		#endregion
 	}

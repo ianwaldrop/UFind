@@ -14,7 +14,7 @@ namespace UFind
 			UFModel.Window.Show();
 		}
 
-		public static void CloseWindow()
+		internal static void CloseWindow()
 		{
 			if (UFModel.Window != null)
 			{
@@ -22,15 +22,14 @@ namespace UFind
 			}
 		}
 
-		public static void UpdateQuery(string query)
+		internal static void UpdateQuery(string query)
 		{
 			UFModel.Context.Query = query;
 			UFModel.UpdateResults();
 		}
 
-		public static void ProcessEvent(Event current)
+		internal static void ProcessEvent(Event current)
 		{
-
 			// this section was for selecting a result by number; let's number them
 			// before we worry about how to select them
 //			if (char.IsNumber(current.character))
@@ -61,7 +60,7 @@ namespace UFind
 
 				case KeyCode.KeypadEnter:
 				case KeyCode.Return:
-					UFModel.Context.CurrentResult.Execute(UFModel.Context);
+					UFModel.Context.SelectedResult.Execute(UFModel.Context);
 					CloseWindow();
 					current.Use();
 					break;

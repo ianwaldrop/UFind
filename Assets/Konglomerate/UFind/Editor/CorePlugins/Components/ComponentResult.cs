@@ -7,7 +7,6 @@ public class ComponentResult : UFResult
 {
 	public readonly Component component;
 
-	#region Constructors
 	public ComponentResult(Component component)
 	{
 		this.component = component;
@@ -16,9 +15,21 @@ public class ComponentResult : UFResult
 		CanOpenAsset = !(mb == null || MonoScript.FromMonoBehaviour(mb) == null);
 		UnityObject = component;
 	}
-	#endregion
 
-	#region Properties
+	#region implemented abstract members of UFResult
+	public override void Execute(IFinderContext context)
+	{
+		if (ModifierOpen)
+		{
+			var path = AssetDatabase.GetAssetPath(component);
+			InternalEditorUtility.OpenFileAtLineExternal(path, 0);
+		}
+		else
+		{
+			SelectUnityObject(ModifierShift);
+		}
+	}
+
 	public override string Title { get { return ObjectNames.GetInspectorTitle(component); } }
 
 	public override GUIContent Description
@@ -34,21 +45,6 @@ public class ComponentResult : UFResult
 				return GetContentForAdditiveSelection(Title);
 			}
 			return new GUIContent(component.gameObject.name);
-		}
-	}
-	#endregion
-
-	#region Actions
-	public override void Execute(IFinderContext context)
-	{
-		if (ModifierOpen)
-		{
-			var path = AssetDatabase.GetAssetPath(component);
-			InternalEditorUtility.OpenFileAtLineExternal(path, 0);
-		}
-		else
-		{
-			SelectUnityObject(ModifierShift);
 		}
 	}
 	#endregion
