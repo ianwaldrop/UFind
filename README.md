@@ -5,7 +5,7 @@ I built UFind because I don't like having to reach for the mouse every time I wa
 Well. my Mac has search. Sublime and Atom both have search. MonoDevelop has search. Unity has search. But it's not unified, and it pretty much requires that you click something first. And then what about menu items or even custom things in your own projects? Drat! What about pretty, smart, global, search for like anything? What about extensibility? What really happened to the dinosaurs?
 
 #Extensible
-UFind provides a solution for this. Well, not the dinosaurs unfortunately. It comes with some built-in stuff for finding Game Objects, Components, and things in the Asset Database. It's also very easy to create your own plugins to filter things on a per-project basis.
+UFind provides a solution for all of this. Well, not the dinosaurs. It comes with some built-in stuff for finding Game Objects, Components, and things in the Asset Database. It's also very easy to create your own plugins to filter things on a per-project basis.
 
 #Maintainance
 Rome wasn't built in a day, and was eventually sacked.
