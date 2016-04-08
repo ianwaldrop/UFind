@@ -38,6 +38,11 @@ namespace UFind
 			}
 		}
 
+		public override string Title
+		{
+			get { return IsFolder ? GetRelativeAssetPath(path) : UnityObject.name; }
+		}
+
 		public override GUIContent Description
 		{
 			get
@@ -56,11 +61,6 @@ namespace UFind
 
 				return !IsFolder ? new GUIContent(GetRelativeAssetPath(path)) : null;
 			}
-		}
-
-		public override string Title
-		{
-			get { return IsFolder ? GetRelativeAssetPath(path) : UnityObject.name; }
 		}
 		#endregion
 

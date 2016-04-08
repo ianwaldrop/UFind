@@ -3,13 +3,15 @@ using System.Linq;
 using UnityEngine;
 using UnityEditor;
 using System.Collections.Generic;
+using System;
+
+using Object = UnityEngine.Object;
 
 namespace UFind
 {
 	public class ComponentPlugin : UFPlugin
 	{
-		public override string Name { get { return "Components"; } }
-
+		#region IFinderPlugin implementation
 		protected override IEnumerable<IFinderResult> GetObjectResults(IFinderContext context)
 		{
 			return Object.FindObjectsOfType<Component>()
@@ -18,16 +20,17 @@ namespace UFind
 				.Select<Component, IFinderResult>(c => new ComponentResult(c));
 		}
 
-		protected override IEnumerable<IFinderResult> GetCommandResults(IFinderContext context)
-		{
-			return null;
-		}
+		public override string Name { get { return "Components"; } }
+		#endregion
 
-		static readonly System.Type[] ignoredTypes = {
+		#region Private
+		static readonly List<Type> ignoredTypes = new List<Type>
+		{
 			typeof(Transform),
 			typeof(AudioListener),
 			typeof(FlareLayer),
 			typeof(GUILayer)
 		};
+		#endregion
 	}
 }

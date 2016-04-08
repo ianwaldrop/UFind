@@ -7,18 +7,31 @@ namespace UFind
 {
 	public abstract class UFPlugin : IFinderPlugin
 	{
+		#region IFinderPlugin implementation
+		/// <summary>
+		/// Gets the plugin name for display in the result list view.
+		/// </summary>
+		public abstract string Name { get; }
+
+		/// <summary>
+		/// Gets the aggregate score of the plugin's current results.
+		/// </summary>
 		public int Score
 		{
 			get { return results.Sum(r => r.Score); }
 		}
-
-		#region IFinderPlugin implementation
-		public abstract string Name { get; }
 		#endregion
 
 		#region IGenerateResultCollection implementation
+		/// <summary>
+		/// Defines the label text for the header in the result list view.
+		/// </summary>
 		public ReadOnlyCollection<IFinderResult> Results { get { return results.AsReadOnly(); } }
 
+		/// <summary>
+		/// Generates results for the plugin.
+		/// Called internally by UFind; you should never need to call this yourself.
+		/// </summary>
 		public void GenerateResults(IFinderContext context)
 		{
 			results.Clear();
@@ -39,11 +52,17 @@ namespace UFind
 		#endregion
 
 		#region Protected
+		/// <summary>
+		/// Used to generate a list of object results (things).
+		/// </summary>
 		protected virtual IEnumerable<IFinderResult> GetObjectResults(IFinderContext context)
 		{
 			return null;
 		}
 
+		/// <summary>
+		/// Used to generate a list of command results (actions).
+		/// </summary>
 		protected virtual IEnumerable<IFinderResult> GetCommandResults(IFinderContext context)
 		{
 			return null;
