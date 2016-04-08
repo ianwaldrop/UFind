@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/ianwaldrop/UFind.png?label=ready&title=Ready)](https://waffle.io/ianwaldrop/UFind)
 # What is this this?
 I built UFind because I don't like having to reach for the mouse every time I want to find or select something while working. It's boring and slow, and because lazy. This thing tries to solve that.
 
