@@ -5,7 +5,7 @@ using System.Collections.ObjectModel;
 
 namespace UFind
 {
-	public abstract class UFPlugin : IFinderPlugin
+	public abstract class UFPlugin
 	{
 		#region IFinderPlugin implementation
 		/// <summary>
@@ -26,7 +26,7 @@ namespace UFind
 		/// <summary>
 		/// Defines the label text for the header in the result list view.
 		/// </summary>
-		public ReadOnlyCollection<IFinderResult> Results { get { return results.AsReadOnly(); } }
+		public ReadOnlyCollection<UFResult> Results { get { return results.AsReadOnly(); } }
 
 		/// <summary>
 		/// Generates results for the plugin.
@@ -55,7 +55,7 @@ namespace UFind
 		/// <summary>
 		/// Used to generate a list of object results (things).
 		/// </summary>
-		protected virtual IEnumerable<IFinderResult> GetObjectResults(IFinderContext context)
+		protected virtual IEnumerable<UFResult> GetObjectResults(IFinderContext context)
 		{
 			return null;
 		}
@@ -63,14 +63,14 @@ namespace UFind
 		/// <summary>
 		/// Used to generate a list of command results (actions).
 		/// </summary>
-		protected virtual IEnumerable<IFinderResult> GetCommandResults(IFinderContext context)
+		protected virtual IEnumerable<UFResult> GetCommandResults(IFinderContext context)
 		{
 			return null;
 		}
 		#endregion
 
 		#region Private
-		List<IFinderResult> results = new List<IFinderResult>();
+		List<UFResult> results = new List<UFResult>();
 		#endregion
 	}
 }

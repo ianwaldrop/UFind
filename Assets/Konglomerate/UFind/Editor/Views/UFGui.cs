@@ -52,7 +52,7 @@ namespace UFind
 			}
 		}
 
-		internal static void ResultItem(IFinderResult result)
+		internal static void ResultItem(UFResult result)
 		{
 			using (new GUILayout.HorizontalScope())
 			{

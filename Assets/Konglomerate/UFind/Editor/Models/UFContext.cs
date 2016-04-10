@@ -17,7 +17,7 @@ namespace UFind
 
 		public Event CurrentEvent { get { return Event.current; } }
 
-		public IFinderResult SelectedResult { get; internal set; }
+		public UFResult SelectedResult { get; internal set; }
 
 		public UFQuery Query
 		{
@@ -34,7 +34,7 @@ namespace UFind
 		#endregion
 
 		#region Internal
-		internal int GetMatchScoreForResult(IFinderResult result)
+		internal int GetMatchScoreForResult(UFResult result)
 		{
 			return GetMatchScoreForTerm(result.Title);
 		}

@@ -6,7 +6,7 @@ namespace UFind
 {
 	public class ComponentDetailView : UFDetailView
 	{
-		public override void Draw(IFinderContext context, IFinderResult result)
+		public override void Draw(IFinderContext context, UFResult result)
 		{
 			result.To<ComponentResult>(componentResult =>
 			{

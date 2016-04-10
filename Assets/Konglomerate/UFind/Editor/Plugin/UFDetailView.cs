@@ -1,12 +1,7 @@
 ﻿namespace UFind
 {
-	public interface IDetailView
+	public abstract class UFDetailView
 	{
-		void Draw(IFinderContext context, IFinderResult result);
-	}
-
-	public abstract class UFDetailView : IDetailView
-	{
-		public abstract void Draw(IFinderContext context, IFinderResult result);
+		public abstract void Draw(IFinderContext context, UFResult result);
 	}
 }

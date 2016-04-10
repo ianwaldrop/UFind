@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace UFind
 {
-	internal static class UFModel
+	static class UFModel
 	{
 		#region Constructors
 		static UFModel()
@@ -29,7 +29,7 @@ namespace UFind
 		#endregion
 
 		#region Actions
-		internal static void SelectResult(IFinderResult result)
+		internal static void SelectResult(UFResult result)
 		{
 			Context.SelectedResult = result;
 		}
@@ -124,7 +124,7 @@ namespace UFind
 		#endregion
 
 		#region Private
-		static UFPlugin GetPluginForResult(IFinderResult result)
+		static UFPlugin GetPluginForResult(UFResult result)
 		{
 			foreach (var plugin in Plugins)
 			{

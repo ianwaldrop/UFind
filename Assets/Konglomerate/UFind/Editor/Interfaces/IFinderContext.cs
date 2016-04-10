@@ -9,7 +9,7 @@ namespace UFind
 		/// Gets the user's currently selected result.
 		/// </summary>
 		/// <value>The user's currently selected result.</value>
-		IFinderResult SelectedResult { get; }
+		UFResult SelectedResult { get; }
 
 		/// <summary>
 		/// Gets a value indicating whether the current query is a slash command.

@@ -8,12 +8,12 @@ namespace UFind
 	{
 		public override string Name { get { return "Game Objects"; } }
 
-		protected override IEnumerable<IFinderResult> GetObjectResults(IFinderContext context)
+		protected override IEnumerable<UFResult> GetObjectResults(IFinderContext context)
 		{
 			return Object.FindObjectsOfType<Transform>()
 				.Where(t => context.GetIsMatchForTerm(t.name))
 				.OrderBy(t => t.GetSiblingIndex())
-				.Select<Transform, IFinderResult>(t => new HierarchyResult(t.gameObject));
+				.Select<Transform, UFResult>(t => new HierarchyResult(t.gameObject));
 		}
 	}
 }

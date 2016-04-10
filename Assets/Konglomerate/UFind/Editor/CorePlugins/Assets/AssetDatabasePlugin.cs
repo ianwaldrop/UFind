@@ -7,10 +7,10 @@ namespace UFind
 	public class AssetDatabasePlugin : UFPlugin
 	{
 		#region IFinderPlugin implementation
-		protected override IEnumerable<IFinderResult> GetObjectResults(IFinderContext context)
+		protected override IEnumerable<UFResult> GetObjectResults(IFinderContext context)
 		{
 			return AssetDatabase.FindAssets(context.Query.Value)
-				.Select<string, IFinderResult>(g => new AssetDatabaseResult(g));
+				.Select<string, UFResult>(g => new AssetDatabaseResult(g));
 		}
 
 		public override string Name
