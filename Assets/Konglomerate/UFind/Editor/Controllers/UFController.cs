@@ -60,10 +60,21 @@ namespace UFind
 
 				case KeyCode.KeypadEnter:
 				case KeyCode.Return:
-					UFModel.Context.SelectedResult.Execute(UFModel.Context);
-					CloseWindow();
+					ExecuteResult(UFModel.Context.SelectedResult);
 					current.Use();
 					break;
+			}
+		}
+
+		internal static void ExecuteResult(UFResult result)
+		{
+			var context = UFModel.Context;
+
+			result.Execute(context);
+
+			if (!result.GetWindowShouldRemainOpen(context))
+			{
+				CloseWindow();
 			}
 		}
 		#endregion

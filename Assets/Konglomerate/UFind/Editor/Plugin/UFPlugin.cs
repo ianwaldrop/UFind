@@ -5,7 +5,7 @@ using System.Collections.ObjectModel;
 
 namespace UFind
 {
-	public abstract class UFPlugin
+	public abstract class UFPlugin : IRanked
 	{
 		#region IFinderPlugin implementation
 		/// <summary>
