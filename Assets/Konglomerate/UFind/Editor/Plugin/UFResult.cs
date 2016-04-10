@@ -12,6 +12,20 @@ namespace UFind
 		/// </summary>
 		public abstract void Execute(IFinderContext context);
 
+		/// <summary>
+		/// Gets a value indicating whether the UFind window should remain open.
+		/// </summary>
+		/// <returns><c>true</c>, if UFind window should remain open, <c>false</c> otherwise.</returns>
+		/// <param name="context">Context.</param>
+		/// <description>>
+		/// This method will be called immediately after a result is executed.
+		/// Override it if you'd like to retain the UFind window after result execution.
+		/// </description>
+		public virtual bool GetWindowShouldRemainOpen(IFinderContext context)
+		{
+			return false;
+		}
+
 //		public virtual IDetailView DetailView { get { return null; } }
 
 		/// <summary>
