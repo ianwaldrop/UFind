@@ -4,7 +4,7 @@ using UnityEditorInternal;
 
 namespace UFind
 {
-	public abstract class UFResult
+	public abstract class UFResult : IRanked
 	{
 		#region IFinderResult implementation
 		/// <summary>
