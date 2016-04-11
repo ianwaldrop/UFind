@@ -19,7 +19,7 @@ namespace UFind
 
 		void OnLostFocus()
 		{
-			Close();
+			UFController.CloseWindow();
 		}
 
 		void OnGUI()
