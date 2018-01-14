@@ -11,8 +11,10 @@ namespace UFind
 		{
 			textures = Resources.FindObjectsOfTypeAll<Texture2D>();
 
+            // TODO stop using a style asset and, instead, use the new CSS support
 			const string PATH_SKIN_FORMAT = "Konglomerate/UFind/skin-{0}-theme.guiskin";
-			var skinPath = string.Format(PATH_SKIN_FORMAT, EditorGUIUtility.isProSkin ? "dark" : "light");
+            //var skinPath = string.Format(PATH_SKIN_FORMAT, EditorGUIUtility.isProSkin ? "dark" : "light");
+            var skinPath = string.Format(PATH_SKIN_FORMAT, "dark");
 			Skin = EditorGUIUtility.Load(skinPath) as GUISkin;
 
 			Skin.button.focused.background = BuiltInTexture("Pre button");
