@@ -41,28 +41,34 @@ namespace UFind
 //				return;
 //			}
 
-			switch (current.keyCode)
+			if (Event.current.type == EventType.keyDown)
 			{
-				case KeyCode.Escape:
-					UFController.CloseWindow();
-					current.Use();
-					break;
+				switch (current.keyCode)
+				{
+					case KeyCode.Escape:
+						UFController.CloseWindow();
+						current.Use();
+						break;
 
-				case KeyCode.UpArrow:
-					UFModel.SelectPreviousResult();
-					current.Use(); 
-					break;
+					case KeyCode.UpArrow:
+						UFModel.SelectPreviousResult();
+						EnforceQueryFieldStuff();
+						current.Use();
+						break;
 
-				case KeyCode.DownArrow:
-					UFModel.SelectNextResult();
-					current.Use();
-					break;
+					case KeyCode.DownArrow:
+						UFModel.SelectNextResult();
+						EnforceQueryFieldStuff();
+						current.Use();
+						break;
 
-				case KeyCode.KeypadEnter:
-				case KeyCode.Return:
-					ExecuteResult(UFModel.Context.SelectedResult);
-					current.Use();
-					break;
+					case KeyCode.KeypadEnter:
+					case KeyCode.Return:
+						ExecuteResult(UFModel.Context.SelectedResult);
+						EnforceQueryFieldStuff();
+						current.Use();
+						break;
+				}
 			}
 		}
 
@@ -76,6 +82,13 @@ namespace UFind
 			{
 				CloseWindow();
 			}
+		}
+
+		static void EnforceQueryFieldStuff()
+		{
+			UFModel.Context.Query.Trim();
+
+			// TODO: move query cursor position to end
 		}
 		#endregion
 	}

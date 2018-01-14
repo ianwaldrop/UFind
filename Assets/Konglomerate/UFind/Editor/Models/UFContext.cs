@@ -5,116 +5,109 @@ using System.Collections.Generic;
 
 namespace UFind
 {
-	class UFContext : IFinderContext
-	{
-		internal UFContext()
-		{
-			CacheQueryData(Query);
-		}
+    class UFContext : IFinderContext
+    {
+        internal UFContext()
+        {
+            CacheQueryData(Query);
+        }
 
-		#region Properties
-		public bool IsSlashCommand { get { return Query.Value.StartsWith("/"); } }
+        #region Properties
+        public bool IsSlashCommand { get { return Query.Value.StartsWith("/"); } }
 
-		public Event CurrentEvent { get { return Event.current; } }
+        public Event CurrentEvent { get { return Event.current; } }
 
-		public UFResult SelectedResult { get; internal set; }
+        public UFResult SelectedResult { get; internal set; }
 
-		public UFQuery Query
-		{
-			get { return query; }
-			set { CacheQueryData(query = value); }
-		}
-		#endregion
+        public UFQuery Query
+        {
+            get { return query; }
+            set { CacheQueryData(query = value); }
+        }
+        #endregion
 
-		#region Actions
-		public bool GetIsMatchForTerm(string term)
-		{
-			return GetMatchScoreForTerm(term) > 0;
-		}
-		#endregion
+        #region Actions
+        public bool GetIsMatchForTerm(string term)
+        {
+            return GetMatchScoreForTerm(term) > 0;
+        }
+        #endregion
 
-		#region Internal
-		internal int GetMatchScoreForResult(UFResult result)
-		{
-			return GetMatchScoreForTerm(result.Title);
-		}
+        #region Internal
+        internal int GetMatchScoreForResult(UFResult result)
+        {
+            return GetMatchScoreForTerm(result.Title);
+        }
 
-		internal int GetMatchScoreForTerm(string term)
-		{
-			var currentScores = cachedScores[currentQueryValue];
-			if (currentScores.ContainsKey(term))
-			{
-				return currentScores[term];
-			}
-			else
-			{
-				var qchars = new List<char>(currentQueryLowerChars);
-				var score = 0;
+        internal int GetMatchScoreForTerm(string term)
+        {
+            var currentScores = cachedScores[Query.Value];
+            if (currentScores.ContainsKey(term))
+            {
+                return currentScores[term];
+            }
 
-				foreach (var tchars in term.ToLower())
-				{
-					if (qchars.Contains(tchars))
-					{
-						qchars.Remove(tchars);
-						score++;
-					}
-				}
+            var qchars = new List<char>(Query.LowerChars);
+            var score = 0;
 
-				currentScores[term] = score;
+            foreach (var tchars in term.ToLower())
+            {
+                if (qchars.Contains(tchars))
+                {
+                    qchars.Remove(tchars);
+                    score++;
+                }
+            }
 
-				return score;
-			}
-		}
-		#endregion
+            currentScores[term] = score;
 
-		#region Private
-		readonly Dictionary<string, Dictionary<string, int>> cachedScores = new Dictionary<string, Dictionary<string, int>>();
-		readonly List<char> currentQueryLowerChars = new List<char>();
-		string currentQueryValue;
-		UFQuery query;
+            return score;
+        }
+        #endregion
 
-		void CacheQueryData(UFQuery query)
-		{
-			currentQueryValue = query.Value;
-			currentQueryLowerChars.Clear();
-			currentQueryLowerChars.AddRange(Query.Lower.ToCharArray());
+        #region Private
+        readonly Dictionary<string, Dictionary<string, int>> cachedScores = new Dictionary<string, Dictionary<string, int>>();
+        UFQuery query;
 
-			if (!cachedScores.ContainsKey(currentQueryValue))
-			{
-				cachedScores.Add(currentQueryValue, new Dictionary<string, int>());
-			}
-		}
-		#endregion
-	}
+        void CacheQueryData(UFQuery queryToCache)
+        {
+            var value = queryToCache.Value;
+            if (!cachedScores.ContainsKey(value))
+            {
+                cachedScores.Add(value, new Dictionary<string, int>());
+            }
+        }
+        #endregion
+    }
 }
 
 public class UFContextTests
 {
-	[SetUp]
-	public void Setup()
-	{
-		context = new UFContext();
-	}
+    [SetUp]
+    public void Setup()
+    {
+        context = new UFContext();
+    }
 
-	[TearDown]
-	public void TearDown()
-	{
-		context.Query = string.Empty;
-	}
+    [TearDown]
+    public void TearDown()
+    {
+        context.Query = string.Empty;
+    }
 
-	UFContext context;
+    UFContext context;
 
-	[Test]
-	public void SlashCommand_IsTrue()
-	{
-		context.Query = "/test";
-		Assert.IsTrue(context.IsSlashCommand);
-	}
+    [Test]
+    public void SlashCommand_IsTrue()
+    {
+        context.Query = "/test";
+        Assert.IsTrue(context.IsSlashCommand);
+    }
 
-	[Test]
-	public void SlashCommand_IsFalse()
-	{
-		context.Query = "test";
-		Assert.IsFalse(context.IsSlashCommand);
-	}
+    [Test]
+    public void SlashCommand_IsFalse()
+    {
+        context.Query = "test";
+        Assert.IsFalse(context.IsSlashCommand);
+    }
 }

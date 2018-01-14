@@ -1,5 +1,4 @@
-﻿using UFind;
-using UnityEditor;
+﻿using UnityEditor;
 
 namespace UFind
 {
@@ -45,9 +44,18 @@ namespace UFind
 		/// </summary>
 		public string Lower { get { return Value.ToLower(); } }
 
+		public char[] LowerChars { get { return Lower.ToCharArray(); } }
+
 		internal UFQuery(string query)
 		{
 			EditorPrefs.SetString(EPKEY_UFIND_QUERY, query);
+		}
+
+		internal void Trim()
+		{
+			var query = Value;
+			query = query.Replace("\n", null);
+			EditorPrefs.SetString(EPKEY_UFIND_QUERY, query.Trim());
 		}
 
 		public static implicit operator UFQuery(string query)

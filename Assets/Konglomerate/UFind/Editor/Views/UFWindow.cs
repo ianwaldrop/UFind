@@ -24,10 +24,7 @@ namespace UFind
 
 		void OnGUI()
 		{
-			if (Event.current.type == EventType.keyDown)
-			{
-				UFController.ProcessEvent(Event.current);
-			}
+			UFController.ProcessEvent(Event.current);
 
 			GUI.skin = UFStyles.Skin;
 			UFGui.SearchBar();

@@ -18,8 +18,15 @@ namespace UFind
 
 				EditorGUI.BeginChangeCheck();
 				var query = GUILayout.TextArea(UFModel.Context.Query.Value, UFStyles.SearchField);
-//				var id = GUIUtility.GetControlID(FocusType.Keyboard, GUILayoutUtility.GetLastRect());
-//				var editor = (TextEditor)GUIUtility.GetStateObject(typeof(TextEditor), id - 1);
+
+
+//				UFModel.QueryEditor = GUIUtility.QueryStateObject(typeof(TextEditor), GUIUtility.keyboardControl) as TextEditor;
+//				if (UFModel.CursorIndex >= 0)
+//				{
+//					UFModel.QueryEditor.cursorIndex = UFModel.CursorIndex;
+//					UFModel.QueryEditor.selectIndex = UFModel.CursorIndex;
+//					UFModel.CursorIndex = -1;
+//				}
 
 				if (EditorGUI.EndChangeCheck())
 				{

@@ -11,6 +11,7 @@ namespace UFind
 		#region Constructors
 		static UFModel()
 		{
+			CursorIndex = -1;
 			Context = new UFContext();
 			Plugins = ActivatePlugins();
 		}
@@ -24,6 +25,10 @@ namespace UFind
 		internal static UFContext Context { get; private set; }
 		
 		internal static int ResultCount { get; private set; }
+
+		internal static TextEditor QueryEditor { get; set; }
+
+		internal static int CursorIndex { get; set; }
 
 		internal static UFWindow Window { get; set; }
 		#endregion
