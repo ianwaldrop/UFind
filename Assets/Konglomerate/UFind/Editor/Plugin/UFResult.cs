@@ -116,10 +116,14 @@ namespace UFind
 		/// <returns>The content for script editor.</returns>
 		protected static GUIContent GetContentForScriptEditor()
 		{
-			var editor = InternalEditorUtility.GetExternalScriptEditor().Equals("internal")
-				? "MonoDevelop"
-				: "external";
-			return new GUIContent(string.Format("Open in {0}", editor));
+            var pathName = InternalEditorUtility.GetExternalScriptEditor();
+            if (pathName.Equals("internal"))
+            {
+				return new GUIContent("Open in MonoDevelop");
+            }
+			var editorFileName = System.IO.Path.GetFileNameWithoutExtension(pathName);
+			var editorName = ObjectNames.NicifyVariableName(editorFileName);
+			return new GUIContent(string.Format("Open in {0}", editorName));
 		}
 
 		/// <summary>
