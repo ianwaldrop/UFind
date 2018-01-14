@@ -19,9 +19,11 @@ public class ComponentResult : UFResult
 	#region implemented abstract members of UFResult
 	public override void Execute(IFinderContext context)
 	{
-		if (ModifierOpen)
+        var monoBehaviour = component as MonoBehaviour;
+        if (ModifierOpen && monoBehaviour != null)
 		{
-			var path = AssetDatabase.GetAssetPath(component);
+            var script = MonoScript.FromMonoBehaviour(monoBehaviour);
+            var path = AssetDatabase.GetAssetPath(script);
 			InternalEditorUtility.OpenFileAtLineExternal(path, 0);
 		}
 		else
