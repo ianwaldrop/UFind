@@ -1,7 +1,6 @@
 ﻿using UFind;
 using UnityEngine;
 using NUnit.Framework;
-using System.Collections.Generic;
 
 namespace UFind
 {
@@ -9,7 +8,7 @@ namespace UFind
     {
         internal UFContext()
         {
-            CacheQueryData(Query);
+            scoreCache.CacheQueryData(Query);
         }
 
         #region Properties
@@ -22,7 +21,7 @@ namespace UFind
         public UFQuery Query
         {
             get { return query; }
-            set { CacheQueryData(query = value); }
+            set { scoreCache.CacheQueryData(query = value); }
         }
         #endregion
 
@@ -41,42 +40,13 @@ namespace UFind
 
         internal int GetMatchScoreForTerm(string term)
         {
-            var currentScores = cachedScores[Query.Value];
-            if (currentScores.ContainsKey(term))
-            {
-                return currentScores[term];
-            }
-
-            var qchars = new List<char>(Query.LowerChars);
-            var score = 0;
-
-            foreach (var tchars in term.ToLower())
-            {
-                if (qchars.Contains(tchars))
-                {
-                    qchars.Remove(tchars);
-                    score++;
-                }
-            }
-
-            currentScores[term] = score;
-
-            return score;
+            return matchingService.GetMatchScoreForTerm(Query, scoreCache, term);
         }
         #endregion
 
         #region Private
-        readonly Dictionary<string, Dictionary<string, int>> cachedScores = new Dictionary<string, Dictionary<string, int>>();
-        UFQuery query;
-
-        void CacheQueryData(UFQuery queryToCache)
-        {
-            var value = queryToCache.Value;
-            if (!cachedScores.ContainsKey(value))
-            {
-                cachedScores.Add(value, new Dictionary<string, int>());
-            }
-        }
+        readonly IMatchingAlgorithm matchingService = new LevenshteinDistanceMatchingAlgorithm();
+        readonly IScoreCache scoreCache = new SimpleScoreCache();
         #endregion
     }
 }
