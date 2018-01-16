@@ -152,9 +152,22 @@ namespace UFind
 
 		static IEnumerable<Type> FindPlugins()
 		{
-			var assembly = Assembly.GetExecutingAssembly();
-			return assembly.GetTypes().ToList().Where(t => !t.IsAbstract && t.IsSubclassOf(typeof(UFPlugin)));
+			return UFUtilities.GetAllTypes().Where(t => !t.IsAbstract && t.IsSubclassOf(typeof(UFPlugin)));
 		}
 		#endregion
+	}
+
+	public static class UFUtilities
+	{
+		public static IEnumerable<Type> GetAllTypes()
+		{
+			var assembly = Assembly.GetExecutingAssembly();
+			return assembly.GetTypes()
+						   .Concat(assembly
+								   .GetReferencedAssemblies()
+								   .Select(Assembly.Load)
+								   .SelectMany(a => a.GetTypes()))
+						   .Distinct();
+		}
 	}
 }

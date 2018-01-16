@@ -1,7 +1,6 @@
-﻿using UFind;
-using System.Linq;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace UFind
 {
@@ -47,7 +46,7 @@ namespace UFind
 				}
 			}
 
-			results = results.OrderByDescending(r => r.Score).ToList();
+			results = results.OrderBy(r => r.Score).ToList();
 		}
 		#endregion
 

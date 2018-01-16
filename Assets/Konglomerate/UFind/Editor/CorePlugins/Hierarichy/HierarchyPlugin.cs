@@ -11,9 +11,9 @@ namespace UFind
 		protected override IEnumerable<UFResult> GetObjectResults(IFinderContext context)
 		{
 			return Object.FindObjectsOfType<Transform>()
-				.Where(t => context.GetIsMatchForTerm(t.name))
-				.OrderBy(t => t.GetSiblingIndex())
-				.Select<Transform, UFResult>(t => new HierarchyResult(t.gameObject));
+				         .Where(t => context.GetIsMatchForTerm(t.name))
+				         .OrderBy(t => t.GetSiblingIndex())
+				         .Select(t => new HierarchyResult(t.gameObject) as UFResult);
 		}
 	}
 }

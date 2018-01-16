@@ -12,7 +12,7 @@ namespace UFind
         }
 
         #region Properties
-        public bool IsSlashCommand { get { return Query.Value.StartsWith("/"); } }
+        public bool IsSlashCommand { get { return Query.Value.StartsWith("/", System.StringComparison.Ordinal); } }
 
         public Event CurrentEvent { get { return Event.current; } }
 
@@ -47,6 +47,7 @@ namespace UFind
         #region Private
         readonly IMatchingAlgorithm matchingService = new LevenshteinDistanceMatchingAlgorithm();
         readonly IScoreCache scoreCache = new SimpleScoreCache();
+		UFQuery query;
         #endregion
     }
 }

@@ -37,7 +37,11 @@ namespace UFind
 		/// <summary>
 		/// The actual quey value as input by the user.
 		/// </summary>
-		public string Value { get { return EditorPrefs.GetString(EPKEY_UFIND_QUERY, string.Empty); } }
+		public string Value
+		{
+			get { return EditorPrefs.GetString(EPKEY_UFIND_QUERY, string.Empty); }
+			private set { EditorPrefs.SetString(EPKEY_UFIND_QUERY, value); }
+		}
 
 		/// <summary>
 		/// Gets the query transformed to lower case.
@@ -56,6 +60,16 @@ namespace UFind
 			var query = Value;
 			query = query.Replace("\n", null);
 			EditorPrefs.SetString(EPKEY_UFIND_QUERY, query.Trim());
+		}
+
+		internal void Append(string s)
+		{
+			Value += s;
+		}
+
+		internal void Append(char c)
+		{
+			Append(c.ToString());
 		}
 
 		public static implicit operator UFQuery(string query)

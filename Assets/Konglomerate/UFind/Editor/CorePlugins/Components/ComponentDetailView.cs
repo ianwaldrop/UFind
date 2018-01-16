@@ -1,6 +1,5 @@
-﻿using UnityEngine;
-using UnityEditor;
-using UFind;
+﻿using UnityEditor;
+using UnityEngine;
 
 namespace UFind
 {

@@ -19,6 +19,7 @@ namespace UFind
 			if (UFModel.Window != null)
 			{
 				UFModel.Window.Close();
+				UFModel.Context.Query = null;
 			}
 		}
 
@@ -41,7 +42,7 @@ namespace UFind
 //				return;
 //			}
 
-			if (Event.current.type == EventType.keyDown)
+			if (Event.current.type == EventType.KeyDown)
 			{
 				switch (current.keyCode)
 				{
@@ -87,7 +88,6 @@ namespace UFind
 		static void EnforceQueryFieldStuff()
 		{
 			UFModel.Context.Query.Trim();
-
 			// TODO: move query cursor position to end
 		}
 		#endregion

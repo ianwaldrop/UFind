@@ -1,10 +1,8 @@
-using UFind;
-using System.Linq;
-using UnityEngine;
-using UnityEditor;
-using System.Collections.Generic;
 using System;
-
+using System.Collections.Generic;
+using System.Linq;
+using UnityEditor;
+using UnityEngine;
 using Object = UnityEngine.Object;
 
 namespace UFind
@@ -15,9 +13,9 @@ namespace UFind
 		protected override IEnumerable<UFResult> GetObjectResults(IFinderContext context)
 		{
 			return Object.FindObjectsOfType<Component>()
-				.Where(c => !ignoredTypes.Contains(c.GetType())
-				       && context.GetIsMatchForTerm(ObjectNames.GetInspectorTitle(c)))
-				.Select<Component, UFResult>(c => new ComponentResult(c));
+				         .Where(c => !ignoredTypes.Contains(c.GetType())
+				                && context.GetIsMatchForTerm(ObjectNames.GetInspectorTitle(c)))
+				         .Select<Component, UFResult>(c => new ComponentResult(c));
 		}
 
 		public override string Name { get { return "Components"; } }

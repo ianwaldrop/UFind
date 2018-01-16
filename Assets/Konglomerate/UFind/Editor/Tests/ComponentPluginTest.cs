@@ -1,7 +1,6 @@
 using UFind;
 using UnityEngine;
 using NUnit.Framework;
-using System.Collections.Generic;
 
 public class ComponentPluginTest
 {
