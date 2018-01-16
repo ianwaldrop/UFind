@@ -116,7 +116,12 @@ namespace UFind
 		/// <returns>The content for script editor.</returns>
 		protected static GUIContent GetContentForScriptEditor()
 		{
+            #if UNITY_2017_1_OR_NEWER
+            var pathName = ScriptEditorUtility.GetExternalScriptEditor();
+            #else
             var pathName = InternalEditorUtility.GetExternalScriptEditor();
+            #endif
+
             if (pathName.Equals("internal"))
             {
 				return new GUIContent("Open in MonoDevelop");
