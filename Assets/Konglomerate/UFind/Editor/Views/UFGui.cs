@@ -17,16 +17,16 @@ namespace UFind
 				GUI.FocusControl(QUERY_FIELD_NAME);
 
 				EditorGUI.BeginChangeCheck();
-				var query = GUILayout.TextArea(UFModel.Context.Query.Value, UFStyles.SearchField);
+				var query = EditorGUILayout.TextField(UFModel.Context.Query.Value, UFStyles.SearchField);
 
-
-//				UFModel.QueryEditor = GUIUtility.QueryStateObject(typeof(TextEditor), GUIUtility.keyboardControl) as TextEditor;
-//				if (UFModel.CursorIndex >= 0)
-//				{
-//					UFModel.QueryEditor.cursorIndex = UFModel.CursorIndex;
-//					UFModel.QueryEditor.selectIndex = UFModel.CursorIndex;
-//					UFModel.CursorIndex = -1;
-//				}
+				//var query = EditorGUILayout.TextField(UFModel.Context.Query.Value, UFStyles.SearchField);
+				//UFModel.QueryEditor = GUIUtility.GetStateObject(typeof(TextEditor), GUIUtility.keyboardControl) as TextEditor;
+				//if (UFModel.CursorIndex >= 0)
+				//{
+				//	UFModel.QueryEditor.cursorIndex = UFModel.CursorIndex;
+				//	UFModel.QueryEditor.selectIndex = UFModel.CursorIndex;
+				//	UFModel.CursorIndex = -1;
+				//}
 
 				if (EditorGUI.EndChangeCheck())
 				{
@@ -77,15 +77,19 @@ namespace UFind
 				var buttonRect = GUILayoutUtility.GetLastRect();
 				var content = result.Content;
 
-				var imageRect = new Rect(buttonRect);
-				imageRect.size = Vector2.one * buttonRect.height;
+				var imageRect = new Rect(buttonRect)
+				{
+					size = Vector2.one * buttonRect.height
+				};
 				imageRect.width += 20;
 
-				var titleRect = new Rect(buttonRect);
-				titleRect.xMin = imageRect.xMax;
-				titleRect.yMin = buttonRect.yMin;
-				titleRect.width = buttonRect.width - imageRect.width;
-				titleRect.height = buttonRect.height;
+				var titleRect = new Rect(buttonRect)
+				{
+					xMin = imageRect.xMax,
+					yMin = buttonRect.yMin,
+					width = buttonRect.width - imageRect.width,
+					height = buttonRect.height
+				};
 
 				var descriptionContent = result.Description;
 				if (!(descriptionContent == null || string.IsNullOrEmpty(descriptionContent.text)))
@@ -102,24 +106,5 @@ namespace UFind
 				GUI.Label(titleRect, content.text, UFStyles.Title);
 			}
 		}
-
-//		internal static void DetailView(IFinderResult result, float width)
-//		{
-//			if (result.DetailView != null)
-//			{
-//				result.DetailView.Draw(UFModel.Context, result);
-//			}
-//			else
-//			{
-//				result.Target.To<Object>(obj =>
-//				{
-//					using (var scope = new GUILayout.VerticalScope(GUILayout.Width(width)))
-//					{
-//						var editor = Editor.CreateEditor(obj);
-//						editor.DrawDefaultInspector();
-//					}
-//				});
-//			}
-//		}
 	}
 }
